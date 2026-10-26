@@ -21,6 +21,8 @@ import {
 import Footer from "@/components/footer";
 import Gallery from "@/components/gallery";
 import { pages, facebook, instagram, menu, type PageSlug } from "@/lib/site";
+import { getPageMetadata, getPageStructuredData } from "@/lib/seo";
+import StructuredData from "@/components/structured-data";
 const slugs = Object.keys(pages).filter((s) => s !== "home");
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -33,16 +35,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   if (!slugs.includes(slug)) return {};
-  const page = pages[slug as PageSlug];
-  return {
-    title: { absolute: page.title },
-    description: page.paragraphs[0]?.text,
-    alternates: { canonical: `/${slug}/` },
-    openGraph: {
-      title: page.title,
-      images: [{ url: "/images/IMG_1480-edit.jpg" }],
-    },
-  };
+  return getPageMetadata(slug as PageSlug);
 }
 const heroData: Record<
   string,
@@ -412,6 +405,7 @@ export default async function Page({
   const h = heroData[slug];
   return (
     <>
+      <StructuredData data={getPageStructuredData(slug as PageSlug)} />
       <main id="main" className={`page-${slug}`}>
         <Hero {...h} />
         {slug === "about-us" ? (

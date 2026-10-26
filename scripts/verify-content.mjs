@@ -18,13 +18,20 @@ for (const [slug, page] of Object.entries(source)) {
   const $ = load(await response.text());
   $("script,style").remove();
   const body = compact($("main").text());
-  for (const { text } of page.paragraphs) {
+  // The homepage Menu card and its announcement were explicitly removed.
+  const paragraphs = page.paragraphs.filter(
+    (_, index) => slug !== "home" || index !== 2,
+  );
+  const headings = page.headings.filter(
+    (heading) => slug !== "home" || heading !== "Menu",
+  );
+  for (const { text } of paragraphs) {
     count++;
     if (!body.includes(compact(text)))
       errors.push(`${path}: missing or changed copy: ${text.slice(0, 110)}`);
   }
   const headingText = compact($("main").text()).toLowerCase();
-  for (const heading of page.headings) {
+  for (const heading of headings) {
     count++;
     if (!headingText.includes(compact(heading).toLowerCase()))
       errors.push(`${path}: missing heading: ${heading}`);
@@ -49,7 +56,7 @@ for (const [slug, page] of Object.entries(source)) {
   if (!compact($("footer").text()).includes("info@beachavencomplex.com"))
     errors.push(`${path}: missing contact email`);
   console.log(
-    `Verified ${path} (${page.paragraphs.length} original text blocks)`,
+    `Verified ${path} (${paragraphs.length} retained original text blocks)`,
   );
 }
 for (const path of assets) {

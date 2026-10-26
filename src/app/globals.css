@@ -1,5 +1,6 @@
 @import "./fonts.css";
 :root {
+  --maroon: #633344;
   --cream: #f8f6f0;
   --paper: #efede4;
   --green: #183f3a;
@@ -155,6 +156,18 @@ main {
   height: auto;
   filter: brightness(0) saturate(100%) invert(20%) sepia(14%) saturate(1387%)
     hue-rotate(116deg) brightness(92%) contrast(89%);
+}
+.brand.brand-star-of-india {
+  width: 160px;
+}
+.star-of-india-logo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2181 / 520;
+  background-color: var(--maroon);
+  -webkit-mask: url("/images/star-of-india-logo-1-white.png") center / contain
+    no-repeat;
+  mask: url("/images/star-of-india-logo-1-white.png") center / contain no-repeat;
 }
 .navigation {
   display: flex;
@@ -384,7 +397,7 @@ main {
 }
 .quick-links {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   padding-block: 31px;
@@ -887,7 +900,7 @@ main {
   height: 570px;
 }
 .page-star-of-india {
-  --green: #633344;
+  --green: var(--maroon);
   --ink: #523342;
   --accent: #c5b7b1;
 }
@@ -1390,17 +1403,16 @@ main {
     padding-bottom: 45px;
   }
   .quick-links {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     padding-block: 0;
   }
   .quick-link {
-    padding: 24px !important;
-  }
-  .quick-link:nth-child(2) {
+    padding: 24px 0 !important;
     border-right: 0;
-  }
-  .quick-link:nth-child(-n + 2) {
     border-bottom: 1px solid var(--line);
+  }
+  .quick-link:last-child {
+    border-bottom: 0;
   }
   .quick-link > svg {
     margin-bottom: 12px;
@@ -1695,13 +1707,7 @@ main {
     font-size: 13px;
   }
   .quick-link {
-    padding: 22px 15px !important;
-  }
-  .quick-link:nth-child(odd) {
-    padding-left: 0 !important;
-  }
-  .quick-link:nth-child(even) {
-    padding-right: 0 !important;
+    padding: 22px 0 !important;
   }
   .quick-title {
     font-size: 25px;

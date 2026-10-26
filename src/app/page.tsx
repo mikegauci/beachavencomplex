@@ -1,26 +1,17 @@
 import type { Metadata } from "next";
-import {
-  Anchor,
-  ArrowUpRight,
-  CalendarDays,
-  Info,
-  Utensils,
-} from "lucide-react";
+import { Anchor, ArrowUpRight, CalendarDays, Info } from "lucide-react";
 import Link from "next/link";
 import { Hero, Photo, Text, TextLink } from "@/components/ui";
 import Footer from "@/components/footer";
 import { pages } from "@/lib/site";
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-  openGraph: {
-    title: pages.home.title,
-    images: [{ url: "/images/IMG_1480-edit.jpg" }],
-  },
-};
+import { getPageMetadata, getPageStructuredData } from "@/lib/seo";
+import StructuredData from "@/components/structured-data";
+export const metadata: Metadata = getPageMetadata("home");
 const home = pages.home;
 export default function Home() {
   return (
     <>
+      <StructuredData data={getPageStructuredData("home")} />
       <main id="main">
         <Hero
           home
@@ -57,12 +48,6 @@ export default function Home() {
         >
           {[
             { title: "About", icon: Info, href: "/about-us/", p: 1 },
-            {
-              title: "Menu",
-              icon: Utensils,
-              href: "/star-of-india/#menu",
-              p: 2,
-            },
             { title: "Book", icon: CalendarDays, href: "/reservations/", p: 3 },
             { title: "Contact", icon: Anchor, href: "/contact-us/", p: 4 },
           ].map(({ title, icon: Icon, href, p }) => (
@@ -139,7 +124,7 @@ export default function Home() {
         </section>
         <section className="feature feature-reverse container section">
           <Photo
-            src={home.images[4]}
+            src="/images/star-of-india-img-1.jpg"
             alt="Indian food served at Star of India"
           />
           <div className="feature-copy">

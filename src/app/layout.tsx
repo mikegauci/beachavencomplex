@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import Header from "@/components/header";
+import StructuredData from "@/components/structured-data";
+import { getSiteStructuredData, pageSeo, siteUrl } from "@/lib/seo";
 import "./globals.css";
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.beachavencomplex.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Beachaven | Overlooking the blue waters of St. Paul's Bay",
+    default: pageSeo.home.title,
     template: "%s | Beachaven",
   },
-  description:
-    "Beachaven was established in 1977 and has been running ever since. Indian and Mediterranean restaurants, night club and lido overlooking Xemxija Bay, Malta.",
+  description: pageSeo.home.description,
   icons: { icon: "/images/bh-favicon.jpg" },
 };
 export const viewport: Viewport = { themeColor: "#173e3b" };
@@ -23,6 +24,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
+        <StructuredData data={getSiteStructuredData()} />
         <Header />
         {children}
       </body>

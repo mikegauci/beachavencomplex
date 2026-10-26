@@ -7,6 +7,7 @@ import { navigation } from "@/lib/site";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const path = usePathname();
+  const isStarOfIndia = path === "/star-of-india/" || path === "/star-of-india";
   const toggle = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!open) return;
@@ -23,16 +24,24 @@ export default function Header() {
     <header className="site-header">
       <Link
         href="/"
-        className="brand"
+        className={isStarOfIndia ? "brand brand-star-of-india" : "brand"}
         aria-label="Beachaven home"
         onClick={() => setOpen(false)}
       >
-        <img
-          src="/images/bh-logo-white-medium.png"
-          width="130"
-          height="70"
-          alt="Beachaven"
-        />
+        {isStarOfIndia ? (
+          <span
+            className="star-of-india-logo"
+            role="img"
+            aria-label="Star of India"
+          />
+        ) : (
+          <img
+            src="/images/bh-logo-white-medium.png"
+            width="130"
+            height="70"
+            alt="Beachaven"
+          />
+        )}
       </Link>
       <nav
         aria-label="Main navigation"
