@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Captured originals are tracked in the compressed reference archive.
+/source-content/*.html
+/artifacts/

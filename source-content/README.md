@@ -1,0 +1,1 @@
+Original pages and asset URLs from https://www.beachavencomplex.com/, captured 26 October 2026 for this redesign. The compressed archive retains all eight original HTML responses. The extracted original copy and source links are in ../src/lib/content.json. Raw HTML is reference data only and is never executed by the application.
